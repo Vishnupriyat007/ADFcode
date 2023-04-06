@@ -1,0 +1,6 @@
+{
+	"Status": {
+		"type": "string",
+		"value": "Test"
+	}
+}

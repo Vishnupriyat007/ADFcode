@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "TrainingDF"
+		},
+		"ls_storage_accountKey": {
+			"value": ""
+		},
+		"ls_trainingsql_connectionString": {
+			"value": ""
+		},
+		"LS_HTTP_properties_typeProperties_url": {
+			"value": "http://universities.hipolabs.com/"
+		},
+		"ls_storage_properties_typeProperties_url": {
+			"value": "https://trainingstoragevpriya.dfs.core.windows.net/"
+		},
+		"TR_Storage_properties_Pl_Basics_parameters_SourceFileName": {
+			"value": "Test"
+		},
+		"TR_Storage_properties_typeProperties_scope": {
+			"value": "/subscriptions/9b9a0423-f5fd-4883-a003-f49440a6a741/resourceGroups/TrainingRG/providers/Microsoft.Storage/storageAccounts/trainingstoragevpriya"
+		},
+		"test_properties_Pl_Basics_parameters_SourceFileName": {
+			"value": "Test"
+		},
+		"trigger1_properties_pipeline_parameters_SourceFileName": {
+			"value": "Test"
+		}
+	}
+}

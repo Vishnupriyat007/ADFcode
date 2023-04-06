@@ -1,0 +1,118 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "TrainingDF"
+		},
+		"ls_storage_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_storage'"
+		},
+		"ls_trainingsql_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_trainingsql'"
+		},
+		"LS_HTTP_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "http://universities.hipolabs.com/"
+		},
+		"ls_storage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://trainingstoragevpriya.dfs.core.windows.net/"
+		},
+		"TR_Storage_properties_Pl_Basics_parameters_SourceFileName": {
+			"type": "string",
+			"defaultValue": "Test"
+		},
+		"TR_Storage_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/9b9a0423-f5fd-4883-a003-f49440a6a741/resourceGroups/TrainingRG/providers/Microsoft.Storage/storageAccounts/trainingstoragevpriya"
+		},
+		"test_properties_Pl_Basics_parameters_SourceFileName": {
+			"type": "string",
+			"defaultValue": "Test"
+		},
+		"trigger1_properties_pipeline_parameters_SourceFileName": {
+			"type": "string",
+			"defaultValue": "Test"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "TrainingDF_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ls_storage_accountKey": {
+						"value": "[parameters('ls_storage_accountKey')]"
+					},
+					"ls_trainingsql_connectionString": {
+						"value": "[parameters('ls_trainingsql_connectionString')]"
+					},
+					"LS_HTTP_properties_typeProperties_url": {
+						"value": "[parameters('LS_HTTP_properties_typeProperties_url')]"
+					},
+					"ls_storage_properties_typeProperties_url": {
+						"value": "[parameters('ls_storage_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "TrainingDF_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"TR_Storage_properties_Pl_Basics_parameters_SourceFileName": {
+						"value": "[parameters('TR_Storage_properties_Pl_Basics_parameters_SourceFileName')]"
+					},
+					"TR_Storage_properties_typeProperties_scope": {
+						"value": "[parameters('TR_Storage_properties_typeProperties_scope')]"
+					},
+					"test_properties_Pl_Basics_parameters_SourceFileName": {
+						"value": "[parameters('test_properties_Pl_Basics_parameters_SourceFileName')]"
+					},
+					"trigger1_properties_pipeline_parameters_SourceFileName": {
+						"value": "[parameters('trigger1_properties_pipeline_parameters_SourceFileName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'TrainingDF_ArmTemplate_0')]"
+			]
+		}
+	]
+}
