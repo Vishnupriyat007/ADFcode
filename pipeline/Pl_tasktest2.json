@@ -1,0 +1,65 @@
+{
+	"name": "Pl_tasktest2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Tasktest123",
+					"value": {
+						"value": "@pipeline().globalParameters.Status",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Append variable1",
+				"type": "AppendVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tasktest456",
+					"value": "abcd"
+				}
+			},
+			{
+				"name": "Append variable2",
+				"type": "AppendVariable",
+				"dependsOn": [
+					{
+						"activity": "Append variable1",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tasktest456",
+					"value": "vishnu"
+				}
+			}
+		],
+		"variables": {
+			"Tasktest123": {
+				"type": "String"
+			},
+			"tasktest456": {
+				"type": "Array"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-04-03T01:43:46Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

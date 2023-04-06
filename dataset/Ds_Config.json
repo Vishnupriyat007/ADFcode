@@ -1,0 +1,13 @@
+{
+	"name": "Ds_Config",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_trainingsql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

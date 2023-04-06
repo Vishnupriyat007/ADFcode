@@ -1,0 +1,26 @@
+{
+	"name": "Pl_Basics1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute Pipeline1",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Pl_Basics",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"SourceFileName": "QASOP.pdf"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-03-22T03:58:44Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

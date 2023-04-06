@@ -1,0 +1,17 @@
+{
+	"name": "TrainingDF",
+	"properties": {
+		"globalParameters": {
+			"Status": {
+				"type": "string",
+				"value": "Test"
+			}
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "79872ed5-a834-425c-9575-2a47109d1f0d",
+		"tenantId": "44376307-b429-42ad-8c25-28cd496f4772"
+	}
+}

@@ -1,0 +1,73 @@
+{
+	"name": "PL_Basics3",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "test",
+					"value": {
+						"value": "@pipeline().parameters.Status",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Append variable1",
+				"type": "AppendVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "test2",
+					"value": "abc"
+				}
+			},
+			{
+				"name": "Append variable2",
+				"type": "AppendVariable",
+				"dependsOn": [
+					{
+						"activity": "Append variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "test2",
+					"value": {
+						"value": "pqr",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"Status": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"test": {
+				"type": "String"
+			},
+			"test2": {
+				"type": "Array"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-03-22T03:48:11Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
