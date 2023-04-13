@@ -62,7 +62,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "@concat ('Select * from dbo.',item() .SourceObjectName)",
+										"value": "@concat ('Select * from [dbo].[',item().SourceObjectName,']')",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
