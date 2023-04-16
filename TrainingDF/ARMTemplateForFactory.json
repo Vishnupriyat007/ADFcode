@@ -22,18 +22,6 @@
 		"ls_storage_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://trainingstoragevpriya.dfs.core.windows.net/"
-		},
-		"TR_Storage_properties_Pl_Basics_parameters_SourceFileName": {
-			"type": "string",
-			"defaultValue": "Test"
-		},
-		"TR_Storage_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/9b9a0423-f5fd-4883-a003-f49440a6a741/resourceGroups/TrainingRG/providers/Microsoft.Storage/storageAccounts/trainingstoragevpriya"
-		},
-		"test_properties_Pl_Basics_parameters_SourceFileName": {
-			"type": "string",
-			"defaultValue": "Test"
 		}
 	},
 	"variables": {
@@ -1663,71 +1651,6 @@
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TR_Storage')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Pl_Basics",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"SourceFileName": "[parameters('TR_Storage_properties_Pl_Basics_parameters_SourceFileName')]"
-						}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/test/blobs/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('TR_Storage_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated",
-						"Microsoft.Storage.BlobDeleted"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Pl_Basics')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/test')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Pl_Basics",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"SourceFileName": "[parameters('test_properties_Pl_Basics_parameters_SourceFileName')]"
-						}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 15,
-						"startTime": "2023-03-31T03:12:00Z",
-						"timeZone": "UTC"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Pl_Basics')]"
-			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/dataflow1')]",

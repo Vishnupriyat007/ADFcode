@@ -16,15 +16,6 @@
 		},
 		"ls_storage_properties_typeProperties_url": {
 			"value": "https://trainingstoragevpriya.dfs.core.windows.net/"
-		},
-		"TR_Storage_properties_Pl_Basics_parameters_SourceFileName": {
-			"value": "Test"
-		},
-		"TR_Storage_properties_typeProperties_scope": {
-			"value": "/subscriptions/9b9a0423-f5fd-4883-a003-f49440a6a741/resourceGroups/TrainingRG/providers/Microsoft.Storage/storageAccounts/trainingstoragevpriya"
-		},
-		"test_properties_Pl_Basics_parameters_SourceFileName": {
-			"value": "Test"
 		}
 	}
 }
