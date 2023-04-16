@@ -25,9 +25,6 @@
 		},
 		"test_properties_Pl_Basics_parameters_SourceFileName": {
 			"value": "Test"
-		},
-		"trigger1_properties_pipeline_parameters_SourceFileName": {
-			"value": "Test"
 		}
 	}
 }

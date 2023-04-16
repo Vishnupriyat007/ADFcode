@@ -34,10 +34,6 @@
 		"test_properties_Pl_Basics_parameters_SourceFileName": {
 			"type": "string",
 			"defaultValue": "Test"
-		},
-		"trigger1_properties_pipeline_parameters_SourceFileName": {
-			"type": "string",
-			"defaultValue": "Test"
 		}
 	},
 	"variables": {
@@ -1153,7 +1149,7 @@
 										"source": {
 											"type": "AzureSqlSource",
 											"sqlReaderQuery": {
-												"value": "@concat ('Select * from dbo.',item() .SourceObjectName)",
+												"value": "@concat ('Select * from [dbo].[',item().SourceObjectName,']')",
 												"type": "Expression"
 											},
 											"queryTimeout": "02:00:00",
@@ -1213,6 +1209,50 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/Ds_Config')]",
 				"[concat(variables('factoryId'), '/datasets/DS_Destination')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Pl_tasktest4')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Script1",
+						"description": "",
+						"type": "Script",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"linkedServiceName": {
+							"referenceName": "ls_trainingsql",
+							"type": "LinkedServiceReference"
+						},
+						"typeProperties": {
+							"scripts": [
+								{
+									"type": "NonQuery",
+									"text": "Update dbo.OrderItem\nset Quantity = ''\nwhere UnitPrice ='7.30'"
+								}
+							],
+							"scriptBlockExecutionTimeout": "02:00:00"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_trainingsql')]"
 			]
 		},
 		{
@@ -1683,39 +1723,6 @@
 						"startTime": "2023-03-31T03:12:00Z",
 						"timeZone": "UTC"
 					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Pl_Basics')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trigger1')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "Pl_Basics",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"SourceFileName": "[parameters('trigger1_properties_pipeline_parameters_SourceFileName')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Minute",
-					"interval": 15,
-					"startTime": "2023-03-31T03:18:00Z",
-					"delay": "00:00:00",
-					"maxConcurrency": 50,
-					"retryPolicy": {
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
 				}
 			},
 			"dependsOn": [
